@@ -1,5 +1,6 @@
 package com.kaikeventura.webflux.service
 
+import com.kaikeventura.webflux.controller.TaxDTO
 import com.kaikeventura.webflux.document.CompanyDocument
 import com.kaikeventura.webflux.document.TaxDocument
 import com.kaikeventura.webflux.document.TaxType
@@ -22,9 +23,8 @@ class CompanyService(
 
     fun addTax(
         companyId: String,
-        taxType: TaxType,
-        percentage: Double
-    ) {
+        taxDTO: TaxDTO
+    ): Mono<CompanyDocument> =
         companyRepository.findById(companyId)
             .switchIfEmpty(Mono.error(RuntimeException("Company $companyId not found")))
             .block(Duration.ofSeconds(1))!!.let {
@@ -32,14 +32,13 @@ class CompanyService(
                     it.copy(
                         taxes = it.taxes.plus(
                             TaxDocument(
-                                type = taxType,
-                                percentage = percentage
+                                type = taxDTO.taxType,
+                                percentage = taxDTO.percentage
                             )
                         )
                     )
                 )
-        }
-    }
+            }
 
     fun getCompanyTaxes(companyId: String): Mono<CompanyTaxes> {
         return companyRepository.findById(companyId)

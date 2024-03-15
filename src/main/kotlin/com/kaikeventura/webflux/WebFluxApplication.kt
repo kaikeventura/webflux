@@ -22,13 +22,13 @@ class Init(
 ) {
 	@PostConstruct
 	fun run() {
-		TaxType.entries.forEach {
-			companyService.addTax(
-				companyId = "65ed1417b552e602dab19241",
-				taxType = it,
-				percentage = 10.3
-			)
-		}
+//		TaxType.entries.forEach {
+//			companyService.addTax(
+//				companyId = "65ed1417b552e602dab19241",
+//				taxType = it,
+//				percentage = 10.3
+//			)
+//		}
 //		for (i in 1..1000) {
 //			val company = companyService.createCompany("Coquinha geladinha")
 //			println(company.block()?.id!!)
