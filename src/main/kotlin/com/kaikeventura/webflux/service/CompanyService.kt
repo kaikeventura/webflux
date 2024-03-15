@@ -6,12 +6,15 @@ import com.kaikeventura.webflux.document.TaxDocument
 import com.kaikeventura.webflux.document.TaxType
 import com.kaikeventura.webflux.repository.CompanyRepository
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import reactor.core.publisher.Mono
 
 @Service
 class CompanyService(
     private val companyRepository: CompanyRepository
 ) {
+
+    @Transactional(rollbackFor = [Exception::class])
     fun createCompany(companyName: String): Mono<CompanyDocument> =
         companyRepository.save(
             CompanyDocument(
@@ -19,6 +22,7 @@ class CompanyService(
             )
         )
 
+    @Transactional(rollbackFor = [Exception::class])
     fun addTax(
         companyId: String,
         taxDTO: TaxDTO

@@ -1,12 +1,15 @@
 package com.kaikeventura.webflux
 
+import com.kaikeventura.webflux.controller.TaxDTO
 import com.kaikeventura.webflux.document.TaxType
+import com.kaikeventura.webflux.repository.CompanyRepository
 import com.kaikeventura.webflux.service.CompanyService
 import jakarta.annotation.PostConstruct
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories
 import org.springframework.stereotype.Component
+import reactor.core.publisher.Mono
 
 @SpringBootApplication
 @EnableReactiveMongoRepositories
@@ -18,27 +21,18 @@ fun main(args: Array<String>) {
 
 @Component
 class Init(
-	private val companyService: CompanyService
+	private val companyService: CompanyService,
+	private val companyRepository: CompanyRepository
 ) {
 	@PostConstruct
 	fun run() {
-//		TaxType.entries.forEach {
+//		println(companyRepository.findAll().count().block())
+//		companyRepository.findAll().subscribe {
+//			println("oi")
 //			companyService.addTax(
-//				companyId = "65ed1417b552e602dab19241",
-//				taxType = it,
-//				percentage = 10.3
+//				companyId = it.id!!,
+//				taxDTO = TaxDTO(TaxType.entries.random(), 3.0),
 //			)
-//		}
-//		for (i in 1..1000) {
-//			val company = companyService.createCompany("Coquinha geladinha")
-//			println(company.block()?.id!!)
-//			TaxType.entries.forEach {
-//				companyService.addTax(
-//					companyId = company.block()?.id!!,
-//					taxType = it,
-//					percentage = 10.3
-//				)
-//			}
 //		}
 	}
 }
