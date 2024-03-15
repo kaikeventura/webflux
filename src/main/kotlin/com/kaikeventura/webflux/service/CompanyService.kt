@@ -7,8 +7,6 @@ import com.kaikeventura.webflux.document.TaxType
 import com.kaikeventura.webflux.repository.CompanyRepository
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Mono
-import java.time.Duration
-import java.time.temporal.Temporal
 
 @Service
 class CompanyService(
@@ -27,7 +25,7 @@ class CompanyService(
     ): Mono<CompanyDocument> =
         companyRepository.findById(companyId)
             .switchIfEmpty(Mono.error(RuntimeException("Company $companyId not found")))
-            .block(Duration.ofSeconds(1))!!.let {
+            .flatMap {
                 companyRepository.save(
                     it.copy(
                         taxes = it.taxes.plus(
