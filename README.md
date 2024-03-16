@@ -33,8 +33,8 @@
 ![image](https://github.com/kaikeventura/webflux/assets/44590259/a7afdd99-19a4-4c16-978a-cb0adf6c4de4)
 
 #### Comparação
-|     App type    | Requests | Min(ms) |  Max(ms) | AVG(ms) |
-|:---------------:|:--------:|:-------:|:--------:|:-------:|
-| **Http normal** | **9229** |  **3**  | **1892** |  **14** |
-|   Http reativo  |   8524   |    3    |    933   |    17   |
-|       Diff      |    705   |    0    |    959   |    3    |
+|     App type     | Requests | Min(ms) |  Max(ms) | AVG(ms) |
+|:----------------:|:--------:|:-------:|:--------:|:-------:|
+|    Http normal   |   7433   |    3    |   10236  |    28   |
+| **Http reativo** | **7507** |  **2**  | **1167** |  **23** |
+|       Diff       |    74    |    1    |   9069   |    5    |
